@@ -19,9 +19,9 @@ function init(){
       let rawData = fs.readFileSync(path[0]);
       const json = JSON.parse(rawData)
       let markdown = createStructureOfMarkdown(json)
-      markdown += '_________________________________________________\n'
-      markdown += 'Author: [bautistaj](https://github.com/bautistaj)\n\n'
-      markdown += 'Package: [postman-to-markdown](https://github.com/bautistaj)\n'
+      //markdown += '_________________________________________________\n'
+      // markdown += 'Author: [bautistaj](https://github.com/bautistaj)\n\n'
+      // markdown += 'Package: [postman-to-markdown](https://github.com/bautistaj)\n'
 
       const fileName = path[0].split('.')
       writeFile(markdown, fileName[0])
