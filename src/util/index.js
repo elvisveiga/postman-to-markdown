@@ -47,7 +47,8 @@ function ReadCollectionAuthentication() {
 function readAuthorization(auth) {
   let markdown = "";
   if (auth) {
-    markdown += `### 🔑 Authentication ${auth.type}\n`;
+    //markdown += `### 🔑 Authentication ${auth.type}\n`;
+    markdown += `🔑 **Authentication** ${auth.type}\n`;
     markdown += `\n`;
     markdown += `|Param|value|Type|\n`;
     markdown += `|---|---|---|\n`;
@@ -72,7 +73,8 @@ function readRequestOptions(request) {
   let markdown = "";
   if (request) {
     if (request.header.length > 0) {
-      markdown += `### Request Headers\n`;
+    //   markdown += `### Request Headers\n`;
+      markdown += `**Request Headers**\n`;
       markdown += `|KEY|VALUE|\n`;
       markdown += `|---|---|\n`;
       request.header.map((header) => {
@@ -86,7 +88,8 @@ function readRequestOptions(request) {
 function readQueryParams(url) {
   let markdown = "";
   if (url.query) {
-    markdown += `### Query Params\n`;
+    //markdown += `### Query Params\n`;
+    markdown += `**Query Params**\n`;
     markdown += `\n`;
     markdown += `|Param|value|\n`;
     markdown += `|---|---|\n`;
@@ -109,7 +112,8 @@ function readFormDataBody(body) {
 
   if (body) {
     if (body.mode === "raw") {
-      markdown += `### Body (**${body.mode}**)\n`;
+    //   markdown += `### Body (**${body.mode}**)\n`;
+      markdown += `**Body** (**${body.mode}**)\n`;
       markdown += `\n`;
       markdown += `\`\`\`json\n`;
       markdown += `${body.raw}\n`;
@@ -189,17 +193,19 @@ function readItemsOld(items) {
   return markdown;
 }
 
-function readItems(items) {
+function readItems(items, region) {
   let markdown = "";
+  let internalRegion = `#${region == undefined ? "" :  region }`;
   items.forEach((parentItem) => {
     if (parentItem.item != undefined) {
-      markdown += `# 📁 ${parentItem.name} \n`;
       markdown += `\n`;
-      markdown += readItems(parentItem.item);
+      markdown += `${internalRegion} 📁 ${parentItem.name} \n`;
+      markdown += `\n`;
+      markdown += readItems(parentItem.item, internalRegion);
     } else {
       markdown += readMethods(parentItem);
     }
-    return markdown;
+    //return markdown;
   });
 
   return markdown;
